@@ -432,6 +432,21 @@ SUB check_Nukes
           /goto :skipCast
         }
       }
+      |if i don't have aggro and /smartaggro is set, check npc to see if they have a tank class (war pal shd) on them if so skip spell
+      /if (${Nukes2D[${castIndex},${iSmartAggro}]}) {
+        /if (${Me.TargetOfTarget.Class.ShortName.Equal[WAR]}) {
+          /if (${Debug} || ${Debug_Assists}) /echo \ay skipping cast of ${Nukes2D[${castIndex},${iCastName}]}, warrior is tanking and /smartaggro is set
+           /goto :skipCast
+        }
+        /if (${Me.TargetOfTarget.Class.ShortName.Equal[PAL]}) {
+          /if (${Debug} || ${Debug_Assists}) /echo \ay skipping cast of ${Nukes2D[${castIndex},${iCastName}]}, paladin is tanking and /smartaggro is set
+           /goto :skipCast
+        }
+        /if (${Me.TargetOfTarget.Class.ShortName.Equal[SHD]}) {
+          /if (${Debug} || ${Debug_Assists}) /echo \ay skipping cast of ${Nukes2D[${castIndex},${iCastName}]}, shadowknight is tanking and /smartaggro is set
+           /goto :skipCast
+        }
+      }
       |only cast if my aggro is greater than PctAggro and the target is a Named
       /if (${Nukes2D[${castIndex},${iPctAggro}]} > 0) {
         /if (${Me.PctAggro} < ${Nukes2D[${castIndex},${iPctAggro}]} || !${Target.Named}) {

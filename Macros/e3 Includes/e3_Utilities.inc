@@ -190,7 +190,7 @@ SUB ListToArray(ArrayName, Data, delimiter)
 SUB BuildSpellArray(ArrayName, NewArrayName)
   |/echo Array ${ArrayName} ${NewArrayName}
 	/if (!${Defined[SpellProp]}) {
-		/declare SpellProp[38] string outer 0
+		/declare SpellProp[39] string outer 0
 		/varset SpellProp[1] CastName
 		/varset SpellProp[2] CastType
 		/varset SpellProp[3] TargetType
@@ -229,6 +229,7 @@ SUB BuildSpellArray(ArrayName, NewArrayName)
 		/varset SpellProp[36] Zone
     /varset SpellProp[37] MinSick
     /varset SpellProp[38] Ifs
+    /varset SpellProp[39] SmartAggro
 	}
 
   /if (${Defined[${NewArrayName}]}) /deletevar ${NewArrayName}
@@ -274,6 +275,7 @@ SUB BuildSpellArray(ArrayName, NewArrayName)
 	/if (!${Defined[iZone]})		/declare iZone int outer 36
   /if (!${Defined[iMinSick]})		/declare iMinSick int outer 37
   /if (!${Defined[iIfs]})		/declare iIfs int outer 38
+  /if (!${Defined[iSmartAggro]})		/declare iSmartAggro int outer 39
 
 	/declare i int local
 	/declare printAll bool local FALSE
@@ -658,6 +660,12 @@ SUB BuildSpellArray(ArrayName, NewArrayName)
         /varset ${NewArrayName}[${i},${iIfs}] TRUE
         /if (${printAll}) /echo Ifs TRUE
     }
+    | get iSmartAggro - only for tanking classes
+    /if (${${ArrayName}[${i}].Find[/SmartAggro]}) {
+       /varset ${NewArrayName}[${i},${iSmartAggro}] 1
+    }
+   /if (${printAll}) /echo SmartAggro ${${NewArrayName}[${i},${iSmartAggro}]}		
+
     |default casting while invis to 0 which impies no casting while invis
     /varset	${NewArrayName}[${i},${iCastInvis}] 0
 		/if (${printAll}) /echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -416,9 +416,7 @@ SUB EVENT_vetAA(line, ChatSender,vetAAtoUse)
   /if (${vetArray2D[${i},${iCastName}].Equal[${vetAAtoUse}]}) {
     /call check_Ready "vetArray2D" ${i}
     /if (${c_Ready}) {
-      /if (${i}!=${iStaunch} || (${Me.PctMana}>30 && ${Me.PctEndurance}>30)) {
-        /call e3_Cast ${Me.ID} "vetArray2D" ${i}
-      }
+     /call e3_Cast ${Me.ID} "vetArray2D" ${i}
     } else /echo ${vetAAtoUse} is not ready..
   }
   /next i
