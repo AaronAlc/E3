@@ -1481,7 +1481,7 @@ SUB EVENT_exp_group(line, ChatSender, expToggle)
 SUB EVENT_reportMana(line,ChatSender)
 /if (${Me.Class.CanCast}) {
   /if (!${checkEventArgs[${ChatSender},${line},UZ,""]}) /return
-  /if (${Me.PctMana}<100) /docommand ${ChatToggle} ${Me.PctMana}m
+  /docommand ${ChatToggle} ${Me.PctMana}m
 }
 /RETURN
 
@@ -1492,8 +1492,8 @@ SUB EVENT_doRaidInvites(line, raidLeader)
       |have to be a group leader
       /if (!${Me.AmIGroupLeader}) /return
          /if (${Me.CleanName.Equal[${raidLeader}]}) /return
-         /bct ${raidLeader} //raidinvite ${Me.CleanName}
-         /delay 5
+            /bct ${raidLeader} //raidinvite ${Me.CleanName}
+            /delay 5
 }
 /RETURN
 
