@@ -851,7 +851,7 @@ SUB LPAD_NAME_BC(myName, textToPad)
 #EVENT FindSlot "<#1#> Find Slot #2#"
 SUB EVENT_FindSlot(line, ChatSender, SlotToFind)
   /if (!${checkEventArgs[${ChatSender},${line},U,${SlotToFind}]}) /return
-  /if (${Select[${c_eventArgData},charm,leftear,head,face,rightear,neck,shoulder,arms,back,leftwrist,rightwrist,ranged,hands,mainhand,offhand,leftfinger,rightfinger,chest,legs,feet,waist,powersource,ammo, fingers, wrists, ears]}) {
+  /if (${Select[${c_eventArgData},charm,leftear,head,face,rightear,neck,shoulder,arms,back,leftwrist,rightwrist,ranged,hands,mainhand,offhand,leftfinger,rightfinger,chest,legs,feet,waist,powersource,ammo, fingers, wrists, ears, weapons]}) {
 
      /if (${c_eventArgData.Equal[fingers]}) {
         /say Finger Slots --- leftfinger : ${LinkDB[${InvSlot[leftfinger].Item}]} rightfinger: ${LinkDB[${InvSlot[rightfinger].Item}]}
@@ -859,7 +859,9 @@ SUB EVENT_FindSlot(line, ChatSender, SlotToFind)
         /say Wrist Slots --- leftwrist: ${LinkDB[${InvSlot[leftwrist].Item}]} rightfinger: ${LinkDB[${InvSlot[rightwrist].Item}]}
      } else /if (${c_eventArgData.Equal[ears]}) {
         /say Ear Slots --- leftear: ${LinkDB[${InvSlot[leftear].Item}]} rightear : ${LinkDB[${InvSlot[rightear].Item}]}
-     } else /if (!${InvSlot[${c_eventArgData}].Item.ID}) {
+     } else /if ($[c_eventArgData.Equal[weapons]}){
+        /say MH/OH Slots --- mainhand: ${LinkDB[${InvSlot[mainhand].Item}]} offhand: ${LinkDB[${InvSlot[offhand].Item}]}
+     }else /if (!${InvSlot[${c_eventArgData}].Item.ID}) {
         /say ${c_eventArgData}: No Item Equipped
      } else {
         /say ${c_eventArgData}: ${LinkDB[${InvSlot[${c_eventArgData}].Item}]}
@@ -867,7 +869,7 @@ SUB EVENT_FindSlot(line, ChatSender, SlotToFind)
 
   } else {
     /if (${c_eventArgChatSender.Equal[${Me}]}) {
-      /echo Valid Slots: charm, leftear, head, face, rightear, neck, shoulder, arms, leftwrist, rightwrist, ranged, hands, mainhand, offhand, ammo, back, leftfinger, rightfinger, chest, legs, feet, waist, powersource, fingers, wrists
+      /echo Valid Slots: charm, leftear, head, face, rightear, neck, shoulder, arms, leftwrist, rightwrist, ranged, hands, mainhand, offhand, ammo, back, leftfinger, rightfinger, chest, legs, feet, waist, powersource, fingers, wrists, ears, weapons
     }
   }
 /RETURN
