@@ -1503,7 +1503,7 @@ SUB EVENT_doRaidInvites(line, raidLeader)
 SUB Event_acceptTrade(line, ChatSender, eventParams)
   /if (!${checkEventArgs[${ChatSender},${line},UZR,${eventParams}]}) /return
       |only the person the who is targeted will do this
-      /if (!${c_eventArgData.Equal[${Me}]}) /return
+      /if (!${c_eventArgData.Equal[${Me.CleanName}]}) /return
          /notify TradeWnd TRDW_Trade_Button leftmouseup
 /RETURN
 
