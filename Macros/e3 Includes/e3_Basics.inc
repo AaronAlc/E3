@@ -859,9 +859,9 @@ SUB EVENT_FindSlot(line, ChatSender, SlotToFind)
         /say Wrist Slots --- leftwrist: ${LinkDB[${InvSlot[leftwrist].Item}]} rightfinger: ${LinkDB[${InvSlot[rightwrist].Item}]}
      } else /if (${c_eventArgData.Equal[ears]}) {
         /say Ear Slots --- leftear: ${LinkDB[${InvSlot[leftear].Item}]} rightear : ${LinkDB[${InvSlot[rightear].Item}]}
-     } else /if ($[c_eventArgData.Equal[weapons]}){
+     } else /if (${c_eventArgData.Equal[weapons]}) {
         /say MH/OH Slots --- mainhand: ${LinkDB[${InvSlot[mainhand].Item}]} offhand: ${LinkDB[${InvSlot[offhand].Item}]}
-     }else /if (!${InvSlot[${c_eventArgData}].Item.ID}) {
+     } else /if (!${InvSlot[${c_eventArgData}].Item.ID}) {
         /say ${c_eventArgData}: No Item Equipped
      } else {
         /say ${c_eventArgData}: ${LinkDB[${InvSlot[${c_eventArgData}].Item}]}

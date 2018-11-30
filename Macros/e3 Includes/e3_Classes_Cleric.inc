@@ -269,10 +269,10 @@ Sub BuildCorpseList
 Sub defineRezSpell
   /declare rezSpell string local
   /declare i int local
-  /if (${FindItem[Water Sprinkler of Nem Ankh].ID}) {
-    /varset rezSpell Water Sprinkler of Nem Ankh
-  } else /if (${Me.AltAbility[Blessing of Resurrection].ID}) {
+  /if (${Me.AltAbility[Blessing of Resurrection].ID}) {
     /varset rezSpell Blessing of Resurrection
+  } else /if (${FindItem[Water Sprinkler of Nem Ankh].ID}) {
+    /varset rezSpell Water Sprinkler of Nem Ankh
   } else /if (${Me.Book[Reviviscence]}) {
     /varset rezSpell Reviviscence
   } else /if (${Me.Book[Resurrection]}) {
