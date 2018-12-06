@@ -5,7 +5,7 @@ SUB check_Canni
 /if (${Debug}) /echo |- autoCanni ==>
 	/if (${AutoCanni}) {
 	  |only canni if im not in ooc regen
-		/if (${Me.CombatState.NotEqual[RESTING]}) {
+		/if (${Me.CombatState.NotEqual[RESTING]} && !${Me.Moving} && !${Following}) {
 			/declare s int local
 			/for s 1 to ${canniSpells2D.Size[1]}
 			  /if (${canniSpells2D[${s},${iCastName}].NotEqual[Spiritual Channeling]} || (${canniSpells2D[${s},${iCastName}].Equal[Spiritual Channeling]} && ${Me.CombatState.Equal[COMBAT]})) {
