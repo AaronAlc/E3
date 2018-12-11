@@ -1496,6 +1496,7 @@ SUB EVENT_doRaidInvites(line, raidLeader)
          /if (${Me.CleanName.Equal[${raidLeader}]}) /return
             /bct ${raidLeader} //raidinvite ${Me.CleanName}
             /delay 5
+
 }
 /RETURN
 
@@ -1562,7 +1563,7 @@ SUB EVENT_reportAA(line, ChatSender, aaFloor)
 #EVENT statusReport "<#1#> Status Report#*#"
 SUB EVENT_statusReport(line, ChatSender, eventParams)
    /if (!${checkEventArgs[${ChatSender},${line},UZ,""]}) /return
-      /docommand ${ChatToggle} ${Me.Level} : ${Me.PctExp}% Total AA: ${Me.AAPointsTotal} Unused AA: ${Me.AAPoints} 
+      /docommand ${ChatToggle} Level: ${Me.Level} ExpPct: ${Me.PctExp}% Total AA: ${Me.AAPointsTotal} Unused AA: ${Me.AAPoints} AAPct: ${Me.PctAAExp}%
 /RETURN
    
 
