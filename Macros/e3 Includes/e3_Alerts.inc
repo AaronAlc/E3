@@ -84,6 +84,7 @@ SUB alerts_Background_Events
   } else {
     /doevents angmask flush
   }
+
 /RETURN
 
 #event angmask "#*#You feel a gaze of deadly power focusing on you#*#"
