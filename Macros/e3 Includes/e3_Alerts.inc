@@ -81,11 +81,22 @@ SUB alerts_Background_Events
 
   /if (${Zone.ShortName.Equal[anguish]}) {
     /doevents angmask
+    /doevents tureAERamp
   } else {
     /doevents angmask flush
+    /doevents tureAERamp flush
   }
 
 /RETURN
+
+#event tureAERamp "#.#roars with fury as it surveys its attackers.#*#"
+sub event_tureAERamp
+   /if ( ${Me.Name.Equal[Thehulk]} ) { /return
+      /rsay **** TURE AE RAMP INC SOON BACKOUT ****
+   }
+/return
+
+
 
 #event angmask "#*#You feel a gaze of deadly power focusing on you#*#"
 Sub event_angmask
