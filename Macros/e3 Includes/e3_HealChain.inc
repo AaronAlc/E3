@@ -197,11 +197,15 @@ SUB EVENT_lock_TankList(line, ChatSender, tankList_Setting)
 SUB EVENT_set_chainTiming(line, ChatSender, chainTimer_Setting)
 /if (${Debug} || ${Debug_HealChain}) /echo |- EVENT_set_chainTiming ==>
 	/varset chainTimer_Setting ${Int[${chainTimer_Setting}]}
+   /declare min_Timing int local ${Math.Calc[10/${Chain_Count}]}
 	/if (${Chain_Moderator.Equal[${Me.CleanName}]}) {
 		/if (${chainTimer_Setting} >= ${If[${Math.Calc[10/${Chain_Count}]}>${Int[${Math.Calc[10/${Chain_Count}]}]},${Math.Calc[${Int[${Math.Calc[10/${Chain_Count}]}]}+1].Int},${Math.Calc[10/${Chain_Count}].Int}]}) {
+         /varset Chain_Timing ${chainTimer_Setting}
 			/rs Setting Chain Timing to: [${chainTimer_Setting}s].
 		} else {
 			/rs Your Chain Timing cannot be lower than [${If[${Math.Calc[10/${Chain_Count}]}>${Int[${Math.Calc[10/${Chain_Count}]}]},${Math.Calc[${Int[${Math.Calc[10/${Chain_Count}]}]}+1].Int},${Math.Calc[10/${Chain_Count}].Int}]}s].
+         /varset ${min_Timing}
+         /rs Setting Chain timing to ${min_Timing}
 		}
 	}
 /if (${Debug} || ${Debug_HealChain}) /echo <== EVENT_set_chainTiming -|
@@ -412,7 +416,7 @@ SUB nextCH
 	/declare adjustment_Timer timer local 100
 	/varset Chain_NextTimingSet FALSE
 	/delay 10 !${Chain_NextHealTimer}
-	/rs ${Time.Time24} [${Me.PctMana}m] Casting ${If[${Me.Class.ShortName.Equal[clr]},CH,KR]} on ${Spawn[pc =${Chain_Target}].Name} next heal in [${Chain_Timing}s]
+	/rs ${Time.Time24} [${Me.PctMana}m] Casting ${If[${Me.Class.ShortName.Equal[clr]},CH,KR]} on ${Spawn[pc =${Chain_Target}].Name} next heal in [${Chain_Timing}s] Target Distance: ${Target.Distance}
 	| /echo /if (${Chain_TimingAdjustment}) /delay ${Chain_TimingAdjustment}
 	| /if (${Chain_TimingAdjustment}) /delay ${Chain_TimingAdjustment}
 	/casting "${If[${Me.Class.ShortName.Equal[clr]},Complete Heal,Karana's Renewal]}" "-targetid|${Spawn[pc =${Chain_Target}].ID}" -maxtries|3
@@ -423,9 +427,9 @@ SUB nextCH
 
 
 
-#EVENT set_LastHealer "#1# tells the raid#*# #2#:#3#:#4# [#*#] Casting #*# next heal in [#*#]'"
-#EVENT set_LastHealer "#1# tell your raid#*# #2#:#3#:#4# [#*#] Casting #*# next heal in [#*#]'"
-SUB EVENT_set_LastHealer(line, ChatSender, time_Hour, time_Min, time_Sec)
+#EVENT set_LastHealer "#1# tells the raid#*# #2#:#3#:#4# [#*#] Casting #*# next heal in [#*#] Target Distance: #*#'"
+#EVENT set_LastHealer "#1# tell your raid#*# #2#:#3#:#4# [#*#] Casting #*# next heal in [#*#] Target Distance: #*#'"
+SUB EVENT_set_LastHealer(line, ChatSender, time_Hour, time_Min, time_Sec, target_distance)
 /if (${Debug} || ${Debug_HealChain}) /echo |- EVENT_set_LastHealer ==>
   |/echo time_Hour ${time_Hour} time_Min ${time_Min} time_Sec ${time_Sec}
 	/if (${Select[${Me.CleanName},${Chain_MemberList}]}) {
@@ -490,6 +494,7 @@ Sub healChain_Background_Events
     /doevents build_HealChain
     /doevents join_HealChain
     /doevents set_TankList
+    /doevents set_ChainTiming
     /doevents start_HealChain
     /doevents unload_HealChain
     /doevents end_ChainHeal
