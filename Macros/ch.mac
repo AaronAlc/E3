@@ -6,7 +6,7 @@ Sub Main
 		/delay 5
 		/goto :Loop
 	} else {
-		/gu ${Time} Casting CH on ${Target.ID} 
+		/gu ${Time} Casting CH on ${Target.ID} Mana: ${Me.PctMana}m
 		/casting "Complete Heal"
 		/delay 10s !${Me.Casting.ID}
 		/delay 15
