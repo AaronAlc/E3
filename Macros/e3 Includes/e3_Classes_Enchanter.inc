@@ -275,7 +275,26 @@ Sub ENC_Setup
   }
 /return
 |----------------------------------------------------------------------------|
+#event AE_RUNE "#*# tells you, 'AERUNE'"
+sub Event_AE_RUNE(string line)
+/if (${Me.Class.ShortName.Equal[ENC]}) {
+   /if (${Me.AltAbilityReady[Mass Group Buff]} && ${Me.SpellReady[Rune of Rikkukin]}) {
+     /bc Rune of Rikkukin inc...
+     /casting "Mass Group Buff|alt" -maxtries|3
+     :runeReady
+     /if (!${Me.SpellReady[Rune of Rikkukin]}) {
+        /goto :runeReady
+     }
+     /casting "Rune of Rikkukin|alt" -maxtries|3
+     /rs MGB Rune of Rikkukin inc...
+   } else /if (!${Me.AltAbilityReady[Mass Group Buff]}) {
+      /bc Mass Group Buff is not available...
+   } else /bc Rune of Rikkukin is not available...
+}
+/return
+|----------------------------------------------------------------------------|
 Sub ENC_Background_Events
+   /doevents AE_RUNE
 	/doevents charmTarget
 	/doevents toggleMez
 	/doevents charmOn
