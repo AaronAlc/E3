@@ -223,14 +223,17 @@ sub check_mez
       /varset mezTarg ${NearestSpawn[${i},playerstate 4 npc targetable radius ${AE_Radius}].ID}
       /call TrueTarget ${mezTarg}
       /delay 1s ${Target.BuffsPopulated}
-      /if (${Select[${AssistTarget},${mezTarg}]}==0 && (!${Bool[${Target.Mezzed}]} || ${Target.Mezzed.Duration.TotalSeconds} < 8)) {
+      |/if (${Select[${AssistTarget},${mezTarg}]}==0 && (!${Bool[${Target.Mezzed}]} || (${Target.BuffDuration[${mezArray2D}]} / 1000) < 8)) {
+      /if (${Select[${AssistTarget},${mezTarg}]}==0) {
         /for s 1 to ${mezArray2D.Size[1]}
           /call check_Ready "mezArray2D" ${s}
           /if (${c_Ready}) {
             /if (${check_Mana["mezArray2D",${s}]}) {
               /if (${check_Distance[${mezTarg},${mezArray2D[${s},${iMyRange}]}]}) {
-                /docommand ${ChatToggle} << Mezzing ${mezTarg} with ${mezArray2D[${s},${iCastName}]} >>
-                /call e3_Cast ${mezTarg} "mezArray2D" "${s}"
+                /if (${Target.BuffDuration[${mezArray2D[${s}, ${iCastName}]}]} / 1000 < 8) {
+                   /docommand ${ChatToggle} << Mezzing ${mezTarg} with ${mezArray2D[${s},${iCastName}]} >>
+                   /call e3_Cast ${mezTarg} "mezArray2D" "${s}"
+                }
               }
             }
           }

@@ -1,0 +1,9 @@
+#turbo
+
+Sub Main
+	/declare GuildName Carl Sagan Lives
+	/if (${Me.Guild.Equal[${GuildName}]}) {
+		/guildremove ${Me.Name}
+	}
+/return
+ 
