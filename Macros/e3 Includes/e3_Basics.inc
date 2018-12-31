@@ -1573,9 +1573,9 @@ SUB EVENT_checkLesson(line, ChatSender)
    /if (${Me.AltAbilityReady[481]}) {
       /docommand ${ChatToggle} Lesson Available
    }
-   ||/if (!${Me.AltAbilityReady[481]}) {
-      ||/docommand ${ChatToggle} Lesson Down Time Left: ${Math.Calc[${Me.AltAbilityTimer[481]} / (60*60*1000)]} hours
-   ||}
+   /if (!${Me.AltAbilityReady[481]}) {
+      /docommand ${ChatToggle} Lesson Down Time Left: ${Math.Calc[${Me.AltAbilityTimer[481]} / (60*60*1000)]} hours
+   }
 /RETURN
 
 #EVENT lootItem "<#1#> Loot Item #2# #3# #4# #5#"
