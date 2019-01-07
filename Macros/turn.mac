@@ -4,9 +4,8 @@ Sub Main
    /delay 1
    /tar Brevik Kalaner
    /keypress OPEN_INV_BAGS
-   /delay 5
    /stick 3
-   /delay 20
+   /delay 4s
    |give items
    /itemnotify ${FindItem[Splinter of the High Temple].InvSlot} leftmouseup
    /delay 10
@@ -25,7 +24,7 @@ Sub Main
    /notify GiveWnd GVW_Give_Button leftmouseup
    /delay 10
    /autoinv
-   /delay 10
+   /delay 3s
 
    /if (${Bool[${FindItem[Cipher of Txevu].InvSlot}.Equal[Null]}) {
       /say Cipher not received

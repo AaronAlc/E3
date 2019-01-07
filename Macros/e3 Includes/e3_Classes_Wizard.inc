@@ -19,6 +19,7 @@ SUB check_Harvest
 /RETURN
 
 #event AE_WARD "<#1#> Ward#*#"
+#event AE_WARD "#1# tells you, 'Ward'"
 SUB event_AE_WARD(line, ChatSender, eventParams)
 /if (${Me.Class.ShortName.Equal[WIZ]}) {
    /if (!${checkEventArgs[${ChatSender},${line},UZ,""]}) /return
