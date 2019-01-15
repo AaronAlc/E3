@@ -1,0 +1,20 @@
+#turbo
+
+Sub Main
+	:Main_Loop
+	/if (${Zone.ShortName.Equal[karnor]}) {
+		|check for VS
+		/if (${NearestSpawn[npc "Venril Sathir].CleanName.Equal[Venril Sathir]}) {
+			|write to ini
+         /ini "Spawns/Spawns.ini" ${Zone.ShortName} "Venril" "True"
+         /pause 5s
+         /endmacro
+		} else {
+         /ini "Spawns/Spawns.ini" ${Zone.ShortName} "Venril" "False"
+      }
+	}
+	/delay 2m
+	/goto :Main_Loop
+
+/return
+ 

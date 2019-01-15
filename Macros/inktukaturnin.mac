@@ -1,0 +1,39 @@
+|using this for txevu turn in
+
+Sub Main
+   /delay 1
+   /tar Brevik Kalaner
+   /keypress OPEN_INV_BAGS
+   /stick 3
+   /delay 4s
+   |give items
+   /itemnotify ${FindItem[Splinter of the High Temple].InvSlot} leftmouseup
+   /delay 10
+   /click left target
+   /delay 10
+   /itemnotify ${FindItem[Fragment of the High Temple].InvSlot} leftmouseup
+   /delay 10
+   /click left target
+   /delay 10
+   /itemnotify ${FindItem[Sliver of the High Temple].InvSlot} leftmouseup
+   /delay 10
+   /click left target
+   /delay 10
+
+   |click give window and verify cipher
+   /notify GiveWnd GVW_Give_Button leftmouseup
+   /delay 10
+   /autoinv
+   /delay 3s
+
+   /if (${Bool[${FindItem[Cipher of Txevu].InvSlot}.Equal[Null]}) {
+      /say Cipher not received
+   }
+
+
+/Return
+
+
+
+
+
