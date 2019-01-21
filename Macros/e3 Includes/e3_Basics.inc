@@ -1612,12 +1612,13 @@ SUB EVENT_lootItem(line, ChatSender, corpseID, charName, itemName, equipSlot)
                /if (${Corpse.Item[${itemName}].NoDrop}) {
                   /notify ConfirmationDialogBox CD_Yes_Button leftmouseup
                   /delay 15
-                  /docommand ${ChatToggle} Looting ${full_item_name}
                }
+               /docommand ${ChatToggle} Looting ${full_item_name}
                /notify LootWnd LW_DoneButton leftmouseup
-               /delay 5
+               /autoinventory
+               /delay 2s
+               /autoinventory
                /if (${Select[${equipSlot},charm,leftear,head,face,rightear,neck,shoulder,arms,back,leftwrist,rightwrist,ranged,hands,mainhand,offhand,leftfinger,rightfinger,chest,legs,feet,waist,powersource,ammo]}) {
-                  /autoinventory
                   /delay 2s
                   /call SwapItem "${full_item_name}" ${equipSlot}
                   /docommand ${ChatToggle} Equiping ${full_item_name} to ${equipSlot}

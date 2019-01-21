@@ -91,7 +91,7 @@ SUB alerts_Background_Events
 
 #event tureAERamp "#.#roars with fury as it surveys its attackers.#*#"
 sub event_tureAERamp
-   /if ( !${Me.Name.Equal[Thehulk]} ) { /return
+   /if ( ${Me.Name.Equal[Thehulk]} ) { /return
       /rsay **** TURE AE RAMP INC SOON BACKOUT ****
    }
 /return

@@ -6,6 +6,13 @@ Sub Main
 		/delay 5
 		/goto :Loop
 	} else {
+      :ChealLoop
+      /if (${Me.PctMana} < 6) {
+         /sit
+         /delay 100s
+         /goto :ChealLoop
+      }
+      /stand
 		/gu ${Time} Casting CH on ${Target.ID} Mana: ${Me.PctMana}m Distance: ${Target.Distance}
 		/casting "Complete Heal"
 		/delay 10s !${Me.Casting.ID}
