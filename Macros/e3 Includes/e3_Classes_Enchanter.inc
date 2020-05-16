@@ -223,17 +223,14 @@ sub check_mez
       /varset mezTarg ${NearestSpawn[${i},playerstate 4 npc targetable radius ${AE_Radius}].ID}
       /call TrueTarget ${mezTarg}
       /delay 1s ${Target.BuffsPopulated}
-      |/if (${Select[${AssistTarget},${mezTarg}]}==0 && (!${Bool[${Target.Mezzed}]} || (${Target.BuffDuration[${mezArray2D}]} / 1000) < 8)) {
-      /if (${Select[${AssistTarget},${mezTarg}]}==0) {
+      /if (${Select[${AssistTarget},${mezTarg}]}==0 && (!${Bool[${Target.Mezzed}]} || ${Target.Mezzed.Duration.TotalSeconds} < 8)) {
         /for s 1 to ${mezArray2D.Size[1]}
           /call check_Ready "mezArray2D" ${s}
           /if (${c_Ready}) {
             /if (${check_Mana["mezArray2D",${s}]}) {
               /if (${check_Distance[${mezTarg},${mezArray2D[${s},${iMyRange}]}]}) {
-                /if (${Target.BuffDuration[${mezArray2D[${s}, ${iCastName}]}]} / 1000 < 8) {
-                   /docommand ${ChatToggle} << Mezzing ${mezTarg} with ${mezArray2D[${s},${iCastName}]} >>
-                   /call e3_Cast ${mezTarg} "mezArray2D" "${s}"
-                }
+                /docommand ${ChatToggle} << Mezzing ${mezTarg} with ${mezArray2D[${s},${iCastName}]} >>
+                /call e3_Cast ${mezTarg} "mezArray2D" "${s}"
               }
             }
           }
@@ -278,26 +275,7 @@ Sub ENC_Setup
   }
 /return
 |----------------------------------------------------------------------------|
-#event AE_RUNE "#*# tells you, 'AERUNE'"
-sub Event_AE_RUNE(string line)
-/if (${Me.Class.ShortName.Equal[ENC]}) {
-   /if (${Me.AltAbilityReady[Mass Group Buff]} && ${Me.SpellReady[Rune of Rikkukin]}) {
-     /bc Rune of Rikkukin inc...
-     /casting "Mass Group Buff|alt" -maxtries|3
-     :runeReady
-     /if (!${Me.SpellReady[Rune of Rikkukin]}) {
-        /goto :runeReady
-     }
-     /casting "Rune of Rikkukin|alt" -maxtries|3
-     /rs MGB Rune of Rikkukin inc...
-   } else /if (!${Me.AltAbilityReady[Mass Group Buff]}) {
-      /bc Mass Group Buff is not available...
-   } else /bc Rune of Rikkukin is not available...
-}
-/return
-|----------------------------------------------------------------------------|
 Sub ENC_Background_Events
-   /doevents AE_RUNE
 	/doevents charmTarget
 	/doevents toggleMez
 	/doevents charmOn

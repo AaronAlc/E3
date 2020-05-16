@@ -86,17 +86,7 @@ SUB alerts_Background_Events
     /doevents angmask flush
     /doevents tureAERamp flush
   }
-
 /RETURN
-
-#event tureAERamp "#.#roars with fury as it surveys its attackers.#*#"
-sub event_tureAERamp
-   /if ( ${Me.Name.Equal[Thehulk]} ) { /return
-      /rsay **** TURE AE RAMP INC SOON BACKOUT ****
-   }
-/return
-
-
 
 #event angmask "#*#You feel a gaze of deadly power focusing on you#*#"
 Sub event_angmask
@@ -298,6 +288,7 @@ Sub Event_dragornReflect
   /if (${Raid.Leader.Name.Equal[${Me}]}) /rs ~~~ Reflect ON ~~~
 /return
 
+
 Sub Event_goDuck
   /echo in goduck
   /call AssistOff
@@ -312,6 +303,12 @@ Sub Event_goDuck
   /if (${Me.Ducking}) /keypress duck
   /if (${Me.PctHPs} < ${pcthp}) /echo looks like i failed Event_goDuck: origHP ${pcthp} currHP ${Me.PctHPs}
 /return
+
+#event tureAERamp "#.#roars with fury as it surveys its attackers.#*#"
+sub event_tureAERamp
+  /if (${Raid.Leader.Name.Equal[${Me}]}) /rs ***** TURE AE RAMP INC SOON BACKOUT ****
+/return
+
 
 SUB alerts_CharacterSettings
 /return

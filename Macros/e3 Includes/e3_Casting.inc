@@ -309,7 +309,9 @@ Sub e3_Cast(int targetID, ArrayName, int ArrayIndex)
   }
 
 :skipCast
-	/if (${oldItem.Length}) /call SwapItem "${oldItem}" "${${ArrayName}[${ArrayIndex},${iItemMustEquip}]}"
+	/if (${Defined[${ArrayName}]} && ${oldItem.Length}) {
+		/call SwapItem "${oldItem}" "${${ArrayName}[${ArrayIndex},${iItemMustEquip}]}"
+	}
 	/if (${Following} && !${Assisting}) /call AcquireFollow
   /if (${Me.Class.ShortName.Equal[BRD]}) /varset resumeTwistDelay 5
   |/if (${returnTwist})	/call unpauseTwist
@@ -416,7 +418,9 @@ SUB EVENT_vetAA(line, ChatSender,vetAAtoUse)
   /if (${vetArray2D[${i},${iCastName}].Equal[${vetAAtoUse}]}) {
     /call check_Ready "vetArray2D" ${i}
     /if (${c_Ready}) {
-     /call e3_Cast ${Me.ID} "vetArray2D" ${i}
+      /if (${i}!=${iStaunch} || (${Me.PctMana}>30 && ${Me.PctEndurance}>30)) {
+        /call e3_Cast ${Me.ID} "vetArray2D" ${i}
+      }
     } else /echo ${vetAAtoUse} is not ready..
   }
   /next i
@@ -461,7 +465,7 @@ Sub casting_Setup
 	/call iniToVarV "${genSettings_Ini},Casting,Default Spell Gem" DefaultGem int outer
   /call iniToVarV "${genSettings_Ini},Casting,Default Spell Set" Default_SpellSet string outer
 
-  /declare vetArray[11] string outer
+  /declare vetArray[9] string outer
   /declare iLesson    int outer 1
   /declare iThrone    int outer 2
   /declare iArmor     int outer 3
@@ -471,8 +475,6 @@ Sub casting_Setup
   /declare iStaunch   int outer 7
   /declare iExpedient int outer 8
   /declare iJester    int outer 9
-  /declare iPeddler   int outer 10
-  /declare iBanker    int outer 11
   /varset vetArray[${iLesson}]    "Lesson of the Devoted"
   /varset vetArray[${iThrone}]    "Throne of Heroes"
   /varset vetArray[${iArmor}]     "Armor of Experience"
@@ -482,8 +484,6 @@ Sub casting_Setup
   /varset vetArray[${iStaunch}]   "Staunch Recovery"
   /varset vetArray[${iExpedient}] "Expedient Recovery"
   /varset vetArray[${iJester}]    "Chaotic Jester"
-  /varset vetArray[${iPeddler}]    "Summon Permutation Peddler"
-  /varset vetArray[${iBanker}]    "Summon Clockwork Banker"
   /call BuildSpellArray "vetArray" "vetArray2D"
 
 /if (${Debug} || ${Debug_Casting}) /echo <== casting_Setup -|

@@ -105,7 +105,7 @@ sub Event_Rez(line, ChatSender)
 	}
 /return
 |----------------------------------------------------------------------------|
-#EVENT AE_Rez "[MQ2] AERez"
+#EVENT AE_Rez "[MQ2] AE Rez"
 #EVENT AE_Rez "#1# tells you, 'AERez'"
 SUB EVENT_AE_Rez(line, ChatSender)
 /if (${Debug} || ${Debug_Basics}) /echo |- EVENT_AE_Rez ==>
@@ -269,10 +269,10 @@ Sub BuildCorpseList
 Sub defineRezSpell
   /declare rezSpell string local
   /declare i int local
-  /if (${Me.AltAbility[Blessing of Resurrection].ID}) {
-    /varset rezSpell Blessing of Resurrection
-  } else /if (${FindItem[Water Sprinkler of Nem Ankh].ID}) {
+  /if (${FindItem[Water Sprinkler of Nem Ankh].ID}) {
     /varset rezSpell Water Sprinkler of Nem Ankh
+  } else /if (${Me.AltAbility[Blessing of Resurrection].ID}) {
+    /varset rezSpell Blessing of Resurrection
   } else /if (${Me.Book[Reviviscence]}) {
     /varset rezSpell Reviviscence
   } else /if (${Me.Book[Resurrection]}) {

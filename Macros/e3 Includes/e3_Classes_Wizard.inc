@@ -17,21 +17,6 @@ SUB check_Harvest
     }
 	}
 /RETURN
-
-#event AE_WARD "<#1#> Ward#*#"
-#event AE_WARD "#1# tells you, 'Ward'"
-SUB event_AE_WARD(line, ChatSender, eventParams)
-/if (${Me.Class.ShortName.Equal[WIZ]}) {
-   /if (!${checkEventArgs[${ChatSender},${line},UZ,""]}) /return
-   /if (${Me.AltAbilityReady[307]}) {
-      /docommand ${ChatToggle} Casting Ward of Destruction
-      /casting "Ward of Destruction" -maxtries|4
-   }
-   |/if (!${Me.AltAbilityReady[307]}) {
-   |   /docommand ${ChatToggle} Ward of Destruction not available
-   |}
-}
-/RETURN
 |----------------------------------------------------------------------------|
 Sub WIZ_Setup
 /if (${Debug}) /echo |- WIZ_Setup ==>
@@ -65,6 +50,5 @@ Sub WIZ_Aliases
 /return
 |----------------------------------------------------------------------------|
 Sub WIZ_Background_Events
-   /doevents AE_WARD
 	/if (${Me.Pet.ID} && ${Me.Pet.Race.Name.NotEqual[Gnomework]} && ${MacroQuest.Server.Equal[PEQTGC]}) /pet get lost
 /return
